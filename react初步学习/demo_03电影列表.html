@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>电影列表demo</title>
+  <script src="../build/react.js"></script>
+  <script src="../build/react.development.js"></script>
+  <script src="../build/react-dom.development.js"></script>
+  <script src="../build/babel.min.js"></script>
+</head>
+<body>
+  <div id='root'></div>
+  <script type='text/babel'>
+
+    // 实现电影列表组件
+    class Movies extends React.Component {
+        constructor() {
+            super();
+            this.state = {
+                movies: [
+                    { movieName: 'abc', moviePrice: 100 },
+                    { movieName: 'def', moviePrice: 110 },
+                    { movieName: 'asw', moviePrice: 120 },
+                    { movieName: 'gsd', moviePrice: 130 }
+                ]
+            }
+        }
+
+
+
+        render() {
+            return (
+                <div>
+                    <h2>电影列表</h2>
+                    <ul>
+                        { this.state.movies.map(movie => (<li>电影名称: {movie.movieName}, 影票价格: {movie.moviePrice}</li>)) }
+                    </ul>
+                </div>
+            )
+        }
+    }
+
+
+    const rootDOM = () => ReactDOM.render(<Movies />, document.getElementById('root'));
+
+    rootDOM();
+
+  </script>
+</body>
+</html>

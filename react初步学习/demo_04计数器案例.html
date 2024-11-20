@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>计数器案例</title>
+  <script src="../build/react.js"></script>
+  <script src="../build/react.development.js"></script>
+  <script src="../build/react-dom.development.js"></script>
+  <script src="../build/babel.min.js"></script>
+</head>
+<body>
+  <div id='root'></div>
+
+  <script type='text/babel'>
+
+    class Counter extends React.Component {
+        constructor() {
+            super();
+            this.state = {
+                message: '当前计数',
+                count: 100
+            }
+        }
+
+        increment() {
+            this.setState({
+                count: this.state.count + 1
+            })
+        }
+
+        decrement() {
+            this.setState({
+                count: this.state.count - 1
+            })
+        }
+
+        render() {
+            const { message, count } = this.state
+            return (
+                <div>
+                    <h2>{ message }: {count}</h2>
+                    <button onClick={this.increment.bind(this)}>加1</button>
+                    <button onClick={this.decrement.bind(this)}>减1</button>
+                </div>
+            )
+        }
+    }
+
+    const rootDOM = () => ReactDOM.render(<Counter />, document.getElementById('root'))
+
+    rootDOM();
+  </script>
+</body>
+</html>

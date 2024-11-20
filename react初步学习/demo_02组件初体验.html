@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>组件初体验</title>
+  <script src="../build/react.js"></script>
+  <script src="../build/react.development.js"></script>
+  <script src="../build/react-dom.development.js"></script>
+  <script src="../build/babel.min.js"></script>
+  <style>
+      .h1-style {
+          color: red;
+          text-indent: 10px;
+      }
+  </style>
+</head>
+
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+    // TODO: 使用jsx编写react代码必须在script加上type="text/babel", babel用于转义
+
+    // react中组件使用class进行定义声明
+    class Home extends React.Component {
+
+        // 在react中变化的数据需要定义在state中
+        constructor() {
+            super();
+            this.state = {
+                message: 'hello world!'
+            }
+            // 默认情况下this绑定的是undefined，因为在正常的DOM操作中，监听点击，监听函数中的this实际上是节点对象
+            // react并不是直接渲染成真实的dom，所写的button只是一个语法糖，它的本质是react的element对象，那么在发生监听的时候，react在执行函数并没有绑定this，因此是undefined
+            this.changeText = this.changeText.bind(this); // react中默认的this是undefined
+        }
+
+        // react中的方法绑定
+        changeText = () => {
+            this.setState({
+                message: this.state.message === 'hello react!' ? 'hello world!' : 'hello react!'
+            })
+        }
+
+        // 渲染固定使用render()进行渲染
+        render() {
+            return (
+                <div>
+                    <h2>{this.state.message}</h2>
+                    <button onClick={this.changeText}>点击修改</button>
+                </div>
+            )
+        }
+
+    }
+
+
+    const renderDom = () => ReactDOM.render(<Home/>, document.getElementById('root'));
+    renderDom();
+
+</script>
+</body>
+
+</html>
