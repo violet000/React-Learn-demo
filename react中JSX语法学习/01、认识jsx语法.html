@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>认识jsx语法</title>
+  <script src="../build/react.js"></script>
+  <script src="../build/react.development.js"></script>
+  <script src="../build/react-dom.development.js"></script>
+  <script src="../build/babel.min.js"></script>
+</head>
+<body>
+<div id='root'></div>
+
+<script type='text/babel'>
+    /**
+     * 在element变量的声明右侧的赋值标签语法，不是一段字符串，它是一段html标签，原生的js中不允许直接这样操作
+     * 在jsx中，type="text/babel"帮助我们将其转义为浏览器可认识的语法,React.createElement(...)
+     *
+     * JSX是一种javascript的语法拓展，也在很多地方称之为javascript xml，因为看起来像一段xml语法
+     *
+     * react任务渲染逻辑本质上与其他ui逻辑存在内在耦合
+     * 比如：html中的事件绑定逻辑需要在js中实现，实现逻辑进行数据的变更又要在html重新渲染
+     * 因此，react将其组合在一起，html可以在js中实现，css也可以在js中实现，共同构成一个整体的组件代码。
+     *
+     * JSX语法规范：
+     * JSX的顶层只能有一个根元素，所以很多时候会在外层包裹一个div元素(或者是Fragment)
+     * 为了方便阅读，jsx的外层包裹一个小括号(),这样可以方便阅读，并且jsx可以进行书写
+     * jsx中的标签可以是单标签，也可以是双标签，注意的是：如果是单标签，必须的< xxx />的形式
+     */
+
+    const element = <h2>认识jsx语法</h2>
+
+    const rootDOM = () => ReactDOM.render(element, document.getElementById('root'))
+
+    rootDOM();
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jsx代码的注释</title>
+    <script src="../build/react.js"></script>
+    <script src="../build/react.development.js"></script>
+    <script src="../build/react-dom.development.js"></script>
+    <script src="../build/babel.min.js"></script>
+</head>
+<body>
+<div id='root'></div>
+
+<script type='text/babel'>
+
+    class App extends React.Component {
+        constructor() {
+            super();
+        }
+
+        render() {
+            return (
+              // {/**/} jsx的注释
+              <div>
+                  {/* 使用jsx的注释 */}
+                  <span>hello, world!</span>
+              </div>
+            )
+        }
+
+    }
+
+    const rootDOM = () => ReactDOM.render(<App></App>, document.getElementById('root'))
+
+    rootDOM();
+</script>
+</body>
+</html>

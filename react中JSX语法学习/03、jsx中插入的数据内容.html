@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>jsx中插入的数据内容</title>
+  <script src="../build/react.js"></script>
+  <script src="../build/react.development.js"></script>
+  <script src="../build/react-dom.development.js"></script>
+  <script src="../build/babel.min.js"></script>
+</head>
+<body>
+<div id='root'></div>
+
+<script type='text/babel'>
+
+    class App extends React.Component {
+        constructor() {
+            super();
+
+            this.state = {
+                // String/Number/Array 等数据类型可直接在jsx中插入
+                str: 'demo',
+                num: 12,
+                arr: [1, 2, 3, 4, 5],
+
+                // undefined/null/bool 类型不可直接插入使用
+                undef: undefined,
+                nul: null,
+                boolValue: false,
+
+                friend: {
+                    name: 'kobe'
+                }
+            }
+        }
+
+        render() {
+            const { str, num, arr, undef, nul, boolValue, friend } = this.state
+            return (
+                <div>
+                    {/* String/Number/Array 等数据类型可直接在jsx中插入 */}
+                    <span>{ str }</span>
+                    <span>{ num }</span>
+                    <span>{ arr }</span>
+
+                    {/* undefined/null/bool 类型不可直接插入使用 */}
+                    <span>{ undef }</span>
+                    <span>{ nul }</span>
+                    <span>{ boolValue }</span>
+
+                    {/*如果一定需要展示，需要先将其转为String类型再进行展示 注意: undefined类型不能使用toString类型进行转换 */}
+                    <span>{ String(undef) }</span>
+                    <span>{ nul + '' }</span>
+                    <span>{ boolValue.toString() }</span>
+
+                    {/* Object 类型不可直接插入使用，会出现报错，需要Object的什么数据，就进行获取其数据值 */}
+                    {/* <h2>{ friend }</h2>  错误使用，会出现报错 Invariant Violation: Objects are not valid as a React child */}
+                    <h2>{ friend.name }</h2>
+                </div>
+            )
+        }
+
+    }
+
+    const rootDOM = () => ReactDOM.render(<App></App>, document.getElementById('root'))
+
+    rootDOM();
+</script>
+</body>
+</html>

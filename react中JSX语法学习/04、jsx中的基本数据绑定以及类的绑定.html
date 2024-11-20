@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>jsx中的基本数据绑定以及类的绑定</title>
+  <script src="../build/react.js"></script>
+  <script src="../build/react.development.js"></script>
+  <script src="../build/react-dom.development.js"></script>
+  <script src="../build/babel.min.js"></script>
+</head>
+<body>
+<div id='root'></div>
+
+<script type='text/babel'>
+
+    class App extends React.Component {
+        constructor() {
+            super();
+
+            this.state = {
+                hrefUrl: 'https://www.baidu.com',
+                title: 'title',
+                imgUrl: 'xxxx',
+
+                isActive: true,
+
+
+
+            }
+        }
+
+        render() {
+            const { hrefUrl, title, imgUrl, isActive } = this.state
+
+            // 1、字符串拼接
+            const className = `abc def ${ isActive ? 'active' : '' }`;
+
+            // 2、数组解析
+            let classList = ['abc', 'def']
+            if (isActive) {
+                classList.push('active')
+            }
+            const className2 = classList.join(' ')
+
+            // 3、使用github上的第三方库 classnames
+
+            return (
+                <div>
+                    {/* 1、基本数据的绑定 */}
+                    <h2 title={title}>hhhh</h2>
+                    <a href={hrefUrl}>百度一下</a>
+                    <img src={imgUrl} alt='暂无图片'/>
+
+                    {/* 2、class类样式的绑定 */}
+                    <h3 className={className}>哈哈哈哈</h3>
+                    <h4 className={className2}>测试</h4>
+
+                    {/* 3、style对象的绑定 */}
+                    <h5 style={ { color: '#ccc', fontSize: '23px' } }>style样式的绑定</h5>
+                </div>
+            )
+        }
+
+    }
+
+    const rootDOM = () => ReactDOM.render(<App></App>, document.getElementById('root'))
+
+    rootDOM();
+</script>
+</body>
+</html>
