@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>react中的JSX的本质以及原理</title>
+  <script src="../build/react.js"></script>
+  <script src="../build/react.development.js"></script>
+  <script src="../build/react-dom.development.js"></script>
+  <script src="../build/babel.min.js"></script>
+</head>
+<body>
+  <div id='root'></div>
+  <script>
+      /**
+       * 实际上，jsx仅仅只是React.createElement(component, props, ...children)函数的语法糖
+       * 所有的jsx最终都会被转成React.createElement的函数的调用
+       *
+       * createElement需要传递三个参数：
+       * 参数一：type
+       * 当前ReactElement的类型：
+       *  如果是标签元素，那么就使用字符串表示
+       *  如果是组件元素，那么就直接使用组件的名称
+       *
+       * 参数二：config
+       *  所有jsx中的属性都在config中以对象的属性和值的形式存储
+       *  比如传入className作为元素的class
+       *
+       * 参数三：children
+       *  存放在标签中的内容，以children数组的形式进行存储
+       *  当然，如果是多个元素，react内部会对他们进行处理
+       *
+       */
+
+      // babel转义下可以使用如下代码进行编写程序
+      const BabelDOM = (
+          <div>
+              <div className='header'>Header</div>
+              <div className='body'>
+                  <ul>
+                      <li>1</li>
+                      <li>2</li>
+                      <li>3</li>
+                      <li>4</li>
+                      <li>5</li>
+                  </ul>
+              </div>
+              <div className='footer'>Footer</div>
+          </div>
+      )
+
+      // 实际babel转义成的代码是使用了react的内部函数, 如下代码在不使用babel转义的情况下也是可以运行的
+      const originDOM = /*#__PURE__*/ React.createElement(
+          "div",
+          null,
+          /*#__PURE__*/ React.createElement(
+              "div",
+              {
+                  className: "header"
+              },
+              "Header"
+          ),
+          /*#__PURE__*/ React.createElement(
+              "div",
+              {
+                  className: "body"
+              },
+              /*#__PURE__*/ React.createElement(
+                  "ul",
+                  null,
+                  /*#__PURE__*/ React.createElement("li", null, "1"),
+                  /*#__PURE__*/ React.createElement("li", null, "2"),
+                  /*#__PURE__*/ React.createElement("li", null, "3"),
+                  /*#__PURE__*/ React.createElement("li", null, "4"),
+                  /*#__PURE__*/ React.createElement("li", null, "5")
+              )
+          ),
+          /*#__PURE__*/ React.createElement(
+              "div",
+              {
+                  className: "footer"
+              },
+              "Footer"
+          )
+      )
+
+
+      ReactDOM.render(React.createElement(originDOM, null), document.getElementById('root'))
+
+  </script>
+</body>
+</html>

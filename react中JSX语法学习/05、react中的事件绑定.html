@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>jsx中的事件绑定</title>
+  <script src="../build/react.js"></script>
+  <script src="../build/react.development.js"></script>
+  <script src="../build/react-dom.development.js"></script>
+  <script src="../build/babel.min.js"></script>
+</head>
+<body>
+<div id='root'></div>
+
+<script type='text/babel'>
+    /*
+      this的四种绑定规则：
+      1、默认绑定 foo()   ----> 非严格模式下指向的 window 严格模式下指向的 undefined
+      2、隐式绑定 obj.foo() -----> 指向的obj
+      3、显示绑定 foo.bind(obj) ---> 使用call,bind,apply等方式进行绑定
+      4、new绑定 new foo() -----> 使用new关键字创建对象实例，并赋给this
+     */
+
+    /* react的this指向模拟实际情况如下 */
+    const obj = {
+        foo: function() {
+            console.log('this foo', this)
+        }
+    }
+
+    const config = {
+        fee: obj.foo
+    }
+
+    const btn = config.fee
+
+    btn()
+
+
+
+    class App extends React.Component {
+        // class fields
+        name = 'App'
+
+        constructor() {
+            super();
+            this.state = {
+
+            }
+
+            this.btn1Click = this.btn1Click.bind(this)
+        }
+
+        // 事件1
+        btn1Click() {
+            console.log('btn1click', this)
+        }
+
+        // 事件2
+        btn2Click = () => {
+            // 函数使用箭头函数，找不到当前的this作用域，会去上一级找，找到上一级
+            console.log('btn2click', this)
+        }
+
+        // 事件3
+        btn3Click() {
+            console.log('btn3click', this)
+        }
+
+        render() {
+            return (
+                <div>
+                    <h2>事件绑定的理解</h2>
+                    {/* 绑定方式1：bind绑定 */}
+                    <button onClick={this.btn1Click}>按钮1</button>
+                    {/* 绑定方式2：es6 的 class fields */}
+                    <button onClick={this.btn2Click}>按钮2</button>
+                    {/* 绑定方式3：直接传入一个箭头函数, 点击按钮传入箭头函数，箭头函数内部实现了隐式绑定 TODO：必须掌握 */}
+                    <button onClick={() => this.btn3Click()}>按钮3</button>
+                </div>
+            )
+        }
+
+    }
+
+
+
+    const rootDOM = () => ReactDOM.render(<App></App>, document.getElementById('root'))
+
+    rootDOM();
+</script>
+</body>
+</html>

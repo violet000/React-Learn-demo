@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>jsx中的事件绑定</title>
+  <script src="../build/react.js"></script>
+  <script src="../build/react.development.js"></script>
+  <script src="../build/react-dom.development.js"></script>
+  <script src="../build/babel.min.js"></script>
+</head>
+<body>
+<div id='root'></div>
+<script type='text/babel'>
+    /**
+     * react中的参数的传递
+     *
+     * */
+
+   class App extends React.Component {
+    constructor() {
+      super();
+    }
+
+   btn1Click(event) {
+       console.log('btn1Click', event)
+   }
+
+   btn2Click(event) {
+       console.log('btn2Click', event)
+   }
+
+   btn3Click(event, name, age) {
+       // console.log('btn3Click', ...arguments)
+   }
+
+    render() {
+        return (
+            <div>
+                <h2>参数的传递</h2>
+                {/* event参数的传递 */}
+                <button onClick={this.btn1Click}>按钮1</button>
+                <button onClick={(e) => this.btn2Click(e)}>按钮2</button>
+
+                {/*额外参数的传递*/}
+                <button onClick={(e) => this.btn3Click(e, 'kobe', 19)}>按钮3</button>
+            </div>
+        )
+    }
+
+   }
+
+  const rootDOM = () => ReactDOM.render(<App />, document.getElementById('root'))
+  rootDOM();
+</script>
+</body>
+</html>

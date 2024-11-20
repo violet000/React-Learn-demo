@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>jsx中的列表渲染</title>
+  <script src="../build/react.js"></script>
+  <script src="../build/react.development.js"></script>
+  <script src="../build/react-dom.development.js"></script>
+  <script src="../build/babel.min.js"></script>
+  <style>
+    .student-item {
+        border: 1px solid #a91f1f;
+        margin: 10px;
+        padding: 10px;
+    }
+  </style>
+</head>
+<body>
+<div id='root'></div>
+
+<script type='text/babel'>
+
+    class App extends React.Component {
+        /**
+         * 需求：从接口取到底列表数据
+         * 1、需要按照分数score进行从大到小的排序
+         * 2、排序后取分数大于60分的
+         * 3、如果大于60分的超过5人，那么只取前五人数
+         */
+
+        constructor() {
+            super();
+            this.state = {
+                stuList: [
+                    { id: 112, name: 'li', age: 23, score: 81 },
+                    { id: 122, name: 'wang', age: 21, score: 41 },
+                    { id: 111, name: 'zhao', age: 22, score: 31 },
+                    { id: 114, name: 'deng', age: 23, score: 51 },
+                    { id: 82, name: 'zhang', age: 21, score: 51 },
+                    { id: 132, name: 'chen', age: 22, score: 61 },
+                    { id: 12, name: 'xiu', age: 22, score: 11 },
+                    { id: 62, name: 'huang', age: 23, score: 91 },
+                    { id: 172, name: 'gao', age: 22, score: 71 },
+                    { id: 121, name: 'fu', age: 21, score: 61 },
+                    { id: 118, name: 'wu', age: 21, score: 51 },
+                    { id: 109, name: 'ding', age: 22, score: 61 },
+                    { id: 102, name: 'ping', age: 22, score: 71 },
+                    { id: 99, name: 'qi', age: 23, score: 91 },
+                    { id: 92, name: 'ling', age: 22, score: 81 },
+                    { id: 89, name: 'ru', age: 21, score: 41 }
+                ]
+            }
+        }
+
+        render() {
+            const { stuList } = this.state
+
+            return (
+                <div>
+                    <h2>学生成绩公布榜</h2>
+                    <div>
+                        {
+                            stuList.sort((a, b) => b.score - a.score).filter(stu => stu.score >= 60).slice(0, 5).map((item, index) => {
+                                return (
+                                    <div className='student-item' key={index}>
+                                        <h3>学号：{item.id}</h3>
+                                        <h3>姓名：{item.name}</h3>
+                                        <h3>分数：{item.score}</h3>
+                                    </div>
+                                )
+                            })
+                        }
+                    </div>
+                </div>
+            )
+        }
+
+    }
+
+    const rootDOM = () => ReactDOM.render(<App />, document.getElementById('root'))
+    rootDOM()
+</script>
+</body>
+</html>

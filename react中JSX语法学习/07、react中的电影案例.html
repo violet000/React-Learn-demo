@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>jsx中的事件绑定</title>
+  <script src="../build/react.js"></script>
+  <script src="../build/react.development.js"></script>
+  <script src="../build/react-dom.development.js"></script>
+  <script src="../build/babel.min.js"></script>
+  <style>
+    .active {
+        color: red;
+    }
+  </style>
+</head>
+<body>
+  <div id='root'></div>
+
+  <script type='text/babel'>
+
+    class App extends React.Component {
+        constructor() {
+            super();
+
+            this.state = {
+                movies: ['电影1', '电影2', '电影3', '电影4'],
+                currentIndex: 0
+            }
+        }
+
+        changeIndex(index) {
+            this.setState({
+                currentIndex: index
+            })
+        }
+
+        render() {
+            return (
+                <div>
+                    <h2>电影列表</h2>
+                    <ul>
+                        {
+                            this.state.movies.map((item, index) => (
+                                <li className={ this.state.currentIndex === index ? 'active' : '' }  onClick={() => this.changeIndex(index)}>
+                                    {item}
+                                </li>
+                            ))
+                        }
+                    </ul>
+                </div>
+            )
+        }
+
+
+    }
+
+
+    const renderDOM = () => ReactDOM.render(<App/>, document.getElementById('root'));
+    renderDOM();
+  </script>
+
+</body>
+</html>

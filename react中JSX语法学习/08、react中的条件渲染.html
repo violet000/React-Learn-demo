@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>jsx中的条件渲染</title>
+  <script src="../build/react.js"></script>
+  <script src="../build/react.development.js"></script>
+  <script src="../build/react-dom.development.js"></script>
+  <script src="../build/babel.min.js"></script>
+</head>
+<body>
+<div id='root'></div>
+
+<script type='text/babel'>
+
+  class App extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            isShow: false
+        }
+    }
+
+    btnChange() {
+        this.setState({
+            isShow: !this.state.isShow
+        })
+    }
+
+    render() {
+        const { isShow } = this.state
+        return (
+            <div>
+                <button onClick={() => this.btnChange()}>切换</button>
+                { isShow && <h3 >渲染内容....</h3> }
+            </div>
+        )
+    }
+
+  }
+
+  const rootDOM = () => ReactDOM.render(<App />, document.getElementById('root'))
+  rootDOM()
+</script>
+</body>
+</html>
