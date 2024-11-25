@@ -1,0 +1,22 @@
+*, body {
+    padding: 0;
+    margin: 0;
+}
+
+.tab-bar {
+    display: flex;
+    justify-content: space-around;
+}
+
+.sub-tab-bar {
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    color: #747171;
+    background-color: #e8e8e8;
+}
+
+.active {
+    color: #fff;
+    background-color: #1aacea;
+}
