@@ -1,0 +1,17 @@
+.ky-enter {
+    opacity: 0;
+}
+
+.ky-enter-active {
+    opacity: 1;
+    transition: opacity 2s ease-in;
+}
+
+.ky-exit {
+    opacity: 1;
+}
+
+.ky-exit-active {
+    opacity: 0;
+    transition: opacity 2s ease;
+}
