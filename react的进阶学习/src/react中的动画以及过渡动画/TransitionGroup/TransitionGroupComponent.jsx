@@ -45,7 +45,7 @@ export class TransitionGroupComponent extends PureComponent {
                         })
                     }
                 </TransitionGroup>
-                <button onClick={event => this.addBooks()}>添加书籍</button>
+                <div onClick={event => this.addBooks()}>添加书籍</div>
             </>
         )
     }

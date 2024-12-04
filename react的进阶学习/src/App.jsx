@@ -2,7 +2,8 @@ import {Component} from 'react';
 // import {UseStrictMode} from './非受控组件、高阶组件、fragment以及过渡动画/StrictMode的严格模式的使用/UseStrictMode';
 // import {TransitionAnimation} from './react中的动画以及过渡动画/CSSTransition/TransitionAnimation';
 // import {SwitchTransitionComponent} from './react中的动画以及过渡动画/SwitchTransition/SwitchTransitionComponent';
-import {TransitionGroupComponent} from './react中的动画以及过渡动画/TransitionGroup/TransitionGroupComponent';
+// import {TransitionGroupComponent} from './react中的动画以及过渡动画/TransitionGroup/TransitionGroupComponent';
+import {UseReducer} from './Redux的详细使用/Redux的核心概念-reducer/UseReducer';
 // import {Portals} from './非受控组件、高阶组件、fragment以及过渡动画/Portals的使用/Portals';
 // import {UseFragment} from './非受控组件、高阶组件、fragment以及过渡动画/fragment的使用/UseFragment';
 // import {InfoForm} from './非受控组件(高阶组件)、fragment以及过渡动画/受控与非受控组件/InfoForm';
@@ -37,7 +38,7 @@ class App extends Component {
     }
 
     render() {
-        return (<TransitionGroupComponent />);
+        return (<UseReducer />);
     }
 }
 
